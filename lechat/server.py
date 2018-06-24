@@ -45,7 +45,10 @@ class Server():
         for client in self.clients:
             if client != connection:
                 msg += f'{address}\n'
-        msg = ui.users_list(msg)
+        if msg:
+            msg = ui.users_list(msg)
+        else:
+            msg = ui.users_list('You are alone, sorry.')
         connection.send(bytes(msg, 'utf-8'))
 
     def remove_client(self, connection, address):
